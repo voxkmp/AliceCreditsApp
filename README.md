@@ -1,6 +1,6 @@
 This simple Pharo app displays the titles of all songs where the Italian cantautrice (singer-songwriter) Alice (Carla Bissi) has a writing credit, either for music or lyrics or both.
 
-Obviously, it doe not list the many tracks where Alice has sung songs not written or co-written by herself.
+Obviously, it does not list the many tracks where Alice has sung songs not written or co-written by herself.
 
 The data comes from the Italian website 
 
