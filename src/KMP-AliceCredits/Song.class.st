@@ -67,7 +67,7 @@ Song >> songCreditsAsMicrodown [
 	microdown := String empty.
 
 	"add in song title as a header"
-	microdown := '# ' , title , String cr , '# '.
+	microdown := '### ' , title , String cr , '# '.
 
 	" add list of music composers using helper function"
 	microdown := microdown

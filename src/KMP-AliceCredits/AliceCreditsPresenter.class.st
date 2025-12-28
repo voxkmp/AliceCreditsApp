@@ -47,8 +47,9 @@ AliceCreditsPresenter >> initializePresenters [
 
 	titlesList := self newFilteringList.
 	titlesList display: [ :song | song title ].
-	titlesList sortingBlock: [ :a : b | a title < b title].
+	titlesList sortingBlock: [ :a :b | a title < b title ].
 	microdownCredits := MicrodownPresenter new
+
 ]
 
 { #category : 'initialization' }
@@ -62,10 +63,10 @@ AliceCreditsPresenter >> initializeWindow: aWindowPresenter [
 
 { #category : 'accessing' }
 AliceCreditsPresenter >> introductionString [
-"Default microdown text displayed before any particular song is selected"
+	"Default microdown text displayed before any particular song is selected"
 
 	^ '
-# Songwriting Credits
+### Songwriting Credits
 #
 This is a list of all songs for which the Italian cantautrice Alice (Carla Bissi) has an writing credit for either music or lyrics or both. 
 '
