@@ -12,6 +12,17 @@ Class {
 	#tag : 'Core'
 }
 
+{ #category : 'accessing' }
+CreditsData >> collaborators [
+
+	| cowriters |
+	cowriters := Set new.
+	songs do: [ :song |
+			song music do: [ :writer |
+				writer ~= 'Alice' ifTrue: [ cowriters add: writer ] ] ].
+	^ cowriters
+]
+
 { #category : 'private' }
 CreditsData >> creditsAsJson [
 " Returns the list of tracks with writers in JSON format"
@@ -346,7 +357,9 @@ CreditsData >> summaryAsMicrodown [
 
 	^ '### Summary
 	
-	Total songs: ' , songs size asString ,'
+	Total songs: ' , songs size asString , '
 	
-	Songs by Alice alone : ', self songsByAliceAlone size asString.
+	Number of collaborators : ' , self collaborators size asString,'
+	
+   Songs by Alice alone : ' , self songsByAliceAlone size asString
 ]

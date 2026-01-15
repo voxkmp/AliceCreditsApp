@@ -40,9 +40,12 @@ AliceCreditsPresenter >> defaultLayout [
 	^ SpBoxLayout newTopToBottom
 		  add: (SpBoxLayout newLeftToRight
 				   add: titlesList;
-				   add: microdownCredits)expand: true;
+				   add: microdownCredits)
+		  expand: true;
 		  add: microdownSummary withConstraints: [ :constraints |
-constraints height: 160; padding: 5 ];
+			  constraints
+				  height: 180;
+				  padding: 5 ];
 		  yourself
 ]
 
