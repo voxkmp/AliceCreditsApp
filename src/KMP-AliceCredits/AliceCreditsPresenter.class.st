@@ -7,7 +7,8 @@ Class {
 	#instVars : [
 		'creditsData',
 		'titlesList',
-		'microdownCredits'
+		'microdownCredits',
+		'microdownSummary'
 	],
 	#category : 'KMP-AliceCredits-UI',
 	#package : 'KMP-AliceCredits',
@@ -34,11 +35,14 @@ AliceCreditsPresenter >> creditsData [
 
 { #category : 'layout' }
 AliceCreditsPresenter >> defaultLayout [
-"A Filtered list of titles next to a mircodown presenter displaying the actual song credits formatted nicely"
+	"A Filtered list of titles next to a mircodown presenter displaying the actual song credits formatted nicely"
 
-	^ SpBoxLayout newLeftToRight
-		  add: titlesList;
-		  add: microdownCredits;
+	^ SpBoxLayout newTopToBottom
+		  add: (SpBoxLayout newLeftToRight
+				   add: titlesList;
+				   add: microdownCredits)expand: true;
+		  add: microdownSummary withConstraints: [ :constraints |
+constraints height: 160; padding: 5 ];
 		  yourself
 ]
 
@@ -48,8 +52,8 @@ AliceCreditsPresenter >> initializePresenters [
 	titlesList := self newFilteringList.
 	titlesList display: [ :song | song title ].
 	titlesList sortingBlock: [ :a :b | a title < b title ].
-	microdownCredits := MicrodownPresenter new
-
+	microdownCredits := MicrodownPresenter new.
+	microdownSummary := MicrodownPresenter new
 ]
 
 { #category : 'initialization' }
@@ -58,7 +62,7 @@ AliceCreditsPresenter >> initializeWindow: aWindowPresenter [
 	super initializeWindow: aWindowPresenter.
 	aWindowPresenter
 		title: 'Alice Song Credits';
-		initialExtent: 600 @ 400
+		initialExtent: 500 @ 500
 ]
 
 { #category : 'accessing' }
@@ -77,4 +81,5 @@ AliceCreditsPresenter >> updatePresenter [
 
 	titlesList items: self creditsData songs.
 	microdownCredits documentFromString: self introductionString.
+	microdownSummary documentFromString: self creditsData summaryAsMicrodown.
 ]

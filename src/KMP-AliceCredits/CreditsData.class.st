@@ -330,3 +330,23 @@ CreditsData >> songs: anObject [
 
 	songs := anObject
 ]
+
+{ #category : 'accessing' }
+CreditsData >> songsByAliceAlone [
+
+	| aliceAlone |
+	aliceAlone := songs select: [ :s |
+		              s music = #( 'Alice' ) & (s lyrics = #( 'Alice' )) ].
+
+	^ aliceAlone
+]
+
+{ #category : 'accessing' }
+CreditsData >> summaryAsMicrodown [
+
+	^ '### Summary
+	
+	Total songs: ' , songs size asString ,'
+	
+	Songs by Alice alone : ', self songsByAliceAlone size asString.
+]
