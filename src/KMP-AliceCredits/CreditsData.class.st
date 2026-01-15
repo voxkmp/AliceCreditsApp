@@ -19,6 +19,8 @@ CreditsData >> collaborators [
 	cowriters := Set new.
 	songs do: [ :song |
 			song music do: [ :writer |
+				writer ~= 'Alice' ifTrue: [ cowriters add: writer ]].  
+			song  lyrics do: [ :writer |
 				writer ~= 'Alice' ifTrue: [ cowriters add: writer ] ] ].
 	^ cowriters
 ]
