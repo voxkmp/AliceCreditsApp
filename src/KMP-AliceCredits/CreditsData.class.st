@@ -17,10 +17,10 @@ CreditsData >> collaborators [
 
 	| cowriters |
 	cowriters := Set new.
-	songs do: [ :song |
+	self songs do: [ :song |
 			song music do: [ :writer |
-				writer ~= 'Alice' ifTrue: [ cowriters add: writer ]].  
-			song  lyrics do: [ :writer |
+				writer ~= 'Alice' ifTrue: [ cowriters add: writer ] ].
+			song lyrics do: [ :writer |
 				writer ~= 'Alice' ifTrue: [ cowriters add: writer ] ] ].
 	^ cowriters
 ]
@@ -346,10 +346,13 @@ CreditsData >> songs: anObject [
 
 { #category : 'accessing' }
 CreditsData >> songsByAliceAlone [
-
+"If music or lyrics are by Alice alone then the music/lyrics arrays will be #(Alice') - so we can test for that.
+With lyrics we also have to check for an empty lyrics array #( ) because there is an instrumental (no lyrics) in the song list .
+"
 	| aliceAlone |
-	aliceAlone := songs select: [ :s |
-		              s music = #( 'Alice' ) & (s lyrics = #( 'Alice' )) ].
+	aliceAlone := self songs select: [ :s |
+			              s music = #( 'Alice' )
+			              & (s lyrics = #( 'Alice' ) | (s lyrics = #(  ))) ].
 
 	^ aliceAlone
 ]
@@ -359,9 +362,9 @@ CreditsData >> summaryAsMicrodown [
 
 	^ '### Summary
 	
-	Total songs: ' , songs size asString , '
+	Total songs: ' , self songs size asString , '
 	
-	Number of collaborators : ' , self collaborators size asString,'
+	Number of collaborators : ' , self collaborators size asString , '
 	
    Songs by Alice alone : ' , self songsByAliceAlone size asString
 ]
